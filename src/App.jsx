@@ -1,22 +1,28 @@
-import ProductCard from "./components/ProductCard";
+import {useState} from "react";
 
 function App() {
-  return (
+  const[count,setCount] = useState(0);
+  console.log("App rendered");
+
+  function increase(){
+   setCount((prevCount) => prevCount + 1);
+  }
+  function decrease() {
+    setCount((prevCount) => prevCount - 1);
+  }
+
+  function reset() {
+    setCount(0);
+  }
+
+  return(
     <>
-      <ProductCard
-        title="Laptop"
-        price={50000}
-      > Buy Now </ProductCard>
-      <ProductCard
-        title="Phone"
-        price={30000}
-      />
-      <ProductCard
-        title="Tablet"
-        price={25000}
-      />
+    <h1>Counter App</h1>
+    <h2>{count}</h2>
+    <button onClick={increase}>+</button>
+    <button onClick={decrease}>-</button>
+    <button onClick={reset}>Reset</button>
     </>
   );
 }
-
 export default App;
