@@ -1,4 +1,5 @@
-function Footer(){
-    return <h3>Footer Component</h3>
+function Footer() {
+  return <h3>Footer</h3>;
 }
+
 export default Footer;
