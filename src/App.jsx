@@ -1,15 +1,20 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Footer from "./components/Footer";
+import ProductCard from "./components/ProductCard";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Hero />
-      <About />
-      <Footer />
+      <ProductCard
+        title="Laptop"
+        price={50000}
+      > Buy Now </ProductCard>
+      <ProductCard
+        title="Phone"
+        price={30000}
+      />
+      <ProductCard
+        title="Tablet"
+        price={25000}
+      />
     </>
   );
 }
