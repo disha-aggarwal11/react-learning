@@ -1,58 +1,213 @@
-// import { useState } from "react";
-
-// function App() {
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-//   return (
-//     <>
-//       <h1>React Login Example</h1>
-
-//       {isLoggedIn ? (
-//         <>
-//           <h2>Welcome</h2>
-
-//           <button onClick={() => setIsLoggedIn(false)}>
-//             Logout
-//           </button>
-//         </>
-//       ) : (
-//         <button onClick={() => setIsLoggedIn(true)}>
-//           Login
-//         </button>
-//       )}
-//     </>
-//   );
-// }
-
-// export default App;
-
-import ProductCard from "./components/ProductCard";
+import {useState} from "react";
 
 function App() {
-  const products = [
-    { id: 1, title: "Laptop", price: 50000 },
-    { id: 2, title: "Phone", price: 30000 },
-    { id: 3, title: "Tablet", price: 25000 },
-    { id: 4, title: "Mouse", price: 1500 },
-    { id: 5, title: "Keyboard", price: 2500 },
-    { id: 6, title: "Monitor", price: 12000 },
-    { id: 7, title: "Headphones", price: 4000 },
-    { id: 8, title: "Speaker", price: 3500 },
-    { id: 9, title: "Smart Watch", price: 8000 },
-    { id: 10, title: "Camera", price: 45000 },
-  ];
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    bio: "",
+    country: "",
+    gender: "",
+    agree: false,
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if(
+      !formData.name ||
+      !formData.email ||
+      !formData.password ||
+      !formData.country ||
+      !formData.gender 
+    ) {
+      alert("Please fill all required fields");
+      return;
+    }
+
+    if(!formData.email.includes("@")){
+      alert("Please enter a valid email");
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      alert("Password must be at least 8 characters.");
+      return;
+    }
+
+     if (!formData.agree) {
+      alert("Please accept the Terms & Conditions.");
+      return;
+    }
+
+    alert("Registeration Successful !");
+    console.log(formData);
+  }
 
   return (
     <>
-      <h1>Product List</h1>
+      <h1>Registration Form</h1>
 
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          title={product.title}
-          price={product.price}
+      <form onSubmit={handleSubmit}>
+       
+
+        <input
+          type="text"
+          placeholder="Enter Name"
+          value={formData.name}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              name: e.target.value,
+            })
+          }
         />
-      ))}
+
+        <br />
+        <br />
+
+       
+
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={formData.email}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              email: e.target.value,
+            })
+          }
+        />
+
+        <br />
+        <br />
+
+        
+
+        <input
+          type="password"
+          placeholder="Enter Password"
+          value={formData.password}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              password: e.target.value,
+            })
+          }
+        />
+
+        <br />
+        <br />
+
+
+        <textarea
+          placeholder="Write about yourself"
+          value={formData.bio}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              bio: e.target.value,
+            })
+          }
+        />
+
+        <br />
+        <br />
+
+        
+
+        <select
+          value={formData.country}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              country: e.target.value,
+            })
+          }
+        >
+          <option value="">Select Country</option>
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+          <option value="Canada">Canada</option>
+        </select>
+
+        <br />
+        <br />
+
+        
+
+        <label>
+          <input
+            type="radio"
+            value="Male"
+            checked={formData.gender === "Male"}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                gender: e.target.value,
+              })
+            }
+          />
+          Male
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="Female"
+            checked={formData.gender === "Female"}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                gender: e.target.value,
+              })
+            }
+          />
+          Female
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="Other"
+            checked={formData.gender === "Other"}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                gender: e.target.value,
+              })
+            }
+          />
+          Other
+        </label>
+
+        <br />
+        <br />
+
+     
+
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.agree}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                agree: e.target.checked,
+              })
+            }
+          />
+          I agree to the Terms & Conditions
+        </label>
+
+        <br />
+        <br />
+
+        <button type="submit">
+          Register
+        </button>
+      </form>
     </>
   );
 }
