@@ -1,21 +1,23 @@
 import { useState } from "react";
+import TodoInput from "./components/TodoInput";
+import TodoList from "./components/TodoList";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [todos, setTodos] = useState([]);
 
-  function handleClick() {
-    setDarkMode(!darkMode);
+  function addTodo(todo) {
+    setTodos((prevTodos) => [...prevTodos, todo]);
   }
 
   return (
     <>
-      <h1>
-        {darkMode ? "Dark Mode: ON" : "Dark Mode: OFF"}
-      </h1>
+      <h1>Todo App</h1>
 
-      <button onClick={handleClick}>
-        Toggle
-      </button>
+      <TodoInput onAddTodo={addTodo} />
+
+      <TodoList todos={todos} />
+
+      <p>Total Todos: {todos.length}</p>
     </>
   );
 }
