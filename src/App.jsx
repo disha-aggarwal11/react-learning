@@ -1,23 +1,28 @@
 import { useState } from "react";
-import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
+import Navbar from "./components/Navbar";
+import Product from "./components/Product";
+import Cart from "./components/Cart";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+const[cartItems, setCartItems] = useState([]);
 
-  function addTodo(todo) {
-    setTodos((prevTodos) => [...prevTodos, todo]);
-  }
+function addToCart(product){
+  setCartItems((prevsItems) => [...prevsItems,product]);
+}
 
   return (
     <>
-      <h1>Todo App</h1>
+      <Navbar cartItems={cartItems}/>
 
-      <TodoInput onAddTodo={addTodo} />
+      <Product name="Laptop" onAddToCart={addToCart} />
 
-      <TodoList todos={todos} />
+      <Product name="Mouse" onAddToCart={addToCart} />
 
-      <p>Total Todos: {todos.length}</p>
+      <Product name="Keyboard" onAddToCart={addToCart} />
+
+      <Cart cartItems={cartItems} />
+
+      <p>Total Items: {cartItems.length}</p>
     </>
   );
 }
